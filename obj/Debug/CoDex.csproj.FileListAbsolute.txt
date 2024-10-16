@@ -1,0 +1,10 @@
+D:\Учеба\CoDex\bin\Debug\CoDex.exe.config
+D:\Учеба\CoDex\bin\Debug\CoDex.exe
+D:\Учеба\CoDex\bin\Debug\CoDex.pdb
+D:\Учеба\CoDex\obj\Debug\CoDex.csproj.AssemblyReference.cache
+D:\Учеба\CoDex\obj\Debug\CoDex.Form1.resources
+D:\Учеба\CoDex\obj\Debug\CoDex.Properties.Resources.resources
+D:\Учеба\CoDex\obj\Debug\CoDex.csproj.GenerateResource.cache
+D:\Учеба\CoDex\obj\Debug\CoDex.csproj.CoreCompileInputs.cache
+D:\Учеба\CoDex\obj\Debug\CoDex.exe
+D:\Учеба\CoDex\obj\Debug\CoDex.pdb
