@@ -8,3 +8,13 @@ D:\Учеба\CoDex\obj\Debug\CoDex.csproj.GenerateResource.cache
 D:\Учеба\CoDex\obj\Debug\CoDex.csproj.CoreCompileInputs.cache
 D:\Учеба\CoDex\obj\Debug\CoDex.exe
 D:\Учеба\CoDex\obj\Debug\CoDex.pdb
+D:\Учеба\ИБ\CoDex\bin\Debug\CoDex.exe.config
+D:\Учеба\ИБ\CoDex\bin\Debug\CoDex.exe
+D:\Учеба\ИБ\CoDex\bin\Debug\CoDex.pdb
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.csproj.AssemblyReference.cache
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.Form1.resources
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.Properties.Resources.resources
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.csproj.GenerateResource.cache
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.csproj.CoreCompileInputs.cache
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.exe
+D:\Учеба\ИБ\CoDex\obj\Debug\CoDex.pdb

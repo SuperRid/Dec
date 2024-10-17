@@ -242,6 +242,12 @@ namespace CoDex
                                            };
             int a = 0;
             string now = "";
+
+            while (dataBin.Length < 64)
+            {
+                dataBin = dataBin + "0";
+            }
+
             for (int i = 0; i <+ IP.Length; i++)
             {
                 now+= dataBin[IP[i]-1];
