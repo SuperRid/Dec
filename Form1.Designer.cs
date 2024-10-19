@@ -50,6 +50,8 @@
             this.зашифроватьXORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.зашифроватьDECToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дешифроватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дешифроватьXORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дешифроватьDECToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -250,11 +252,27 @@
             // 
             // дешифроватьToolStripMenuItem
             // 
+            this.дешифроватьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.дешифроватьXORToolStripMenuItem,
+            this.дешифроватьDECToolStripMenuItem});
             this.дешифроватьToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.дешифроватьToolStripMenuItem.Name = "дешифроватьToolStripMenuItem";
             this.дешифроватьToolStripMenuItem.Size = new System.Drawing.Size(155, 32);
             this.дешифроватьToolStripMenuItem.Text = "Дешифровать";
-            this.дешифроватьToolStripMenuItem.Click += new System.EventHandler(this.дешифроватьToolStripMenuItem_Click);
+            // 
+            // дешифроватьXORToolStripMenuItem
+            // 
+            this.дешифроватьXORToolStripMenuItem.Name = "дешифроватьXORToolStripMenuItem";
+            this.дешифроватьXORToolStripMenuItem.Size = new System.Drawing.Size(271, 32);
+            this.дешифроватьXORToolStripMenuItem.Text = "Дешифровать XOR";
+            this.дешифроватьXORToolStripMenuItem.Click += new System.EventHandler(this.дешифроватьXORToolStripMenuItem_Click);
+            // 
+            // дешифроватьDECToolStripMenuItem
+            // 
+            this.дешифроватьDECToolStripMenuItem.Name = "дешифроватьDECToolStripMenuItem";
+            this.дешифроватьDECToolStripMenuItem.Size = new System.Drawing.Size(271, 32);
+            this.дешифроватьDECToolStripMenuItem.Text = "Дешифровать DEC";
+            this.дешифроватьDECToolStripMenuItem.Click += new System.EventHandler(this.дешифроватьDECToolStripMenuItem_Click);
             // 
             // очиститьВсеToolStripMenuItem
             // 
@@ -320,6 +338,8 @@
         private System.Windows.Forms.ToolStripMenuItem очиститьВсеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem зашифроватьXORToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem зашифроватьDECToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дешифроватьXORToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дешифроватьDECToolStripMenuItem;
     }
 }
 
