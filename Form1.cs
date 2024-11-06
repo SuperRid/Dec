@@ -72,8 +72,18 @@ namespace CoDex
         string Hex(string num)
         {
             resHex = "";
-            long value = Convert.ToInt64(num, 2);
-            resHex = Convert.ToString(value, 16).ToUpper();
+            string promHex = "";
+            value = 0;
+            for (int i = 0; i < num.Length; i+=8)
+            {
+                value = Convert.ToInt16(num.Substring(i, 8),2);
+                promHex = Convert.ToString(value, 16).ToUpper();
+                
+                while(promHex.Length < 2) promHex = "0" + promHex;
+                resHex += promHex;
+            }
+            //long value = Convert.ToInt64(num, 2);
+            //resHex = Convert.ToString(value, 16).ToUpper();
 
             return resHex;
         }
@@ -243,31 +253,33 @@ namespace CoDex
             int[] a = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
 
 
-            for (int i = 0; i < 8; i++)
-            {
-                // Определяем, какой диапазон выбрать
-                int randomNumber = rand.Next(0, 255);
-                key += (char)randomNumber;
-            }
+            /*  for (int i = 0; i < 8; i++)
+              {
+                  // Определяем, какой диапазон выбрать
+                  int randomNumber = rand.Next(0, 255);
+                  key += (char)randomNumber;
+              }
 
-            for (int i = 0; i < key.Length; i++)
-            {
-                keyBin += KeyBin(key[i]);
-            }
+              for (int i = 0; i < key.Length; i++)
+              {
+                  keyBin += KeyBin(key[i]);
+              }
 
-            for (int i = 0; i < CD.Length; i++)
-            {
-                key56 += keyBin[CD[i] - 1];
-            }
+              for (int i = 0; i < CD.Length; i++)
+              {
+                  key56 += keyBin[CD[i] - 1];
+              }*/
+
+            key56 = "11001001101010000101010101000101111010100001000111001010";
 
             C[0] = key56.Substring(0, 28);
             D[0] = key56.Substring(28, 28);
 
             for (int j = 1; j < 17; j++)
             {
-
-                C[j] = C[j - 1].Substring(a[j - 1]) + C[j - 1].Substring(0, a[j - 1]);
-                D[j] = D[j - 1].Substring(a[j - 1]) + D[j - 1].Substring(0, a[j - 1]);
+                k[j] = "";
+                C[j] = C[0].Substring(a[j - 1]) + C[0].Substring(0, a[j - 1]);
+                D[j] = D[0].Substring(a[j - 1]) + D[0].Substring(0, a[j - 1]);
 
                 for (int l = 0; l < key48.Length; l++)
                 {
@@ -554,7 +566,7 @@ namespace CoDex
             for (int i = 0; i < R.Length; i += 6)
             {
                 A = R.Substring(i, 6);
-                B += BinS(SBox[i / 6, Dex(A.Substring(0, 2)), Dex(A.Substring(2))]);
+                B += BinS(SBox[i / 6, Dex(A.Substring(0,1) + A.Substring(5,1)), Dex(A.Substring(1,4))]);
             }
 
             for (int i = 0; i < P.Length; i++)
@@ -576,6 +588,40 @@ namespace CoDex
             }
 
             return value;
+        }
+
+        private string DexDec(string num)
+        {
+            value = 0;
+            resBin = "";
+            resXOR = "";
+            for (int i = 0; i < num.Length; i+=8)
+            {
+                resBin = num.Substring(i, 8);
+                value = Convert.ToInt32(resBin,2);
+                resXOR += (char)value;
+            }
+
+            return resXOR;
+        }
+
+
+        private string HexINBin(string num)
+        {
+            value = 0;
+            resBin = "";
+            string promBin = "";
+            for (int i = 0; i < num.Length; i += 2)
+            {
+                value = Convert.ToInt16(num.Substring(i,2), 16);
+                promBin = Convert.ToString(value, 2);
+
+                while (promBin.Length < 8) promBin = "0" + promBin;
+                resBin += promBin;
+            }
+              
+            return resBin;
+
         }
 
         string BinS(int num)
@@ -600,10 +646,23 @@ namespace CoDex
 
         private void дешифроватьDECToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            value = 0;
-            h = 0;
+            now = "";
+            blockHex = "";
+            block = "";
             textBox_OpenTextHex.Text = "";
             textBox_OpenText.Text = "";
+            decrDex = "";
+
+            int[] IP = {
+             58, 50, 42, 34, 26, 18, 10, 2,
+             60, 52, 44, 36, 28, 20, 12, 4,
+             62, 54, 46, 38, 30, 22, 14, 6,
+             64, 56, 48, 40, 32, 24, 16, 8,
+             57, 49, 41, 33, 25, 17, 9, 1,
+             59, 51, 43, 35, 27, 19, 11, 3,
+             61, 53, 45, 37, 29, 21, 13, 5,
+             63, 55, 47, 39, 31, 23, 15, 7
+                                            };
 
             int[] IP_1 = {
             40, 8, 48, 16, 56, 24, 64, 32,
@@ -616,29 +675,44 @@ namespace CoDex
             33, 1, 41, 9, 49, 17, 57, 25
                                            };
 
-            for (int i = 0; i < +IP_1.Length; i++)
-            {
-                decrBin += now[IP_1[i] - 1];
-            }
 
-            for (int i = 0; i < decrBin.Length; i++)
+            now = textBox_CloseTextHex.Text;
+            //int blocksCount = (int)Math.Ceiling(now.Length / 16.0); //Кол-во блоков
+
+            for (int i = 0; i < now.Length; i+=16)
             {
-                if (decrBin[i] == '1')
+                string[] R = new string[17];
+                string[] L = new string[17];
+
+                blockHex = now.Substring(i, 16);
+                block = HexINBin(blockHex);
+
+                for (int j = 0; j < IP.Length; j++)
                 {
-                    value += (int)Math.Pow(2, (7 - h));
+                    //Разделим на блоки L0 и R0
+                    if (j < 32) L[16] += block[IP[j] - 1];
+                    else R[16] += block[IP[j] - 1];
                 }
 
-                h++;
-                if (h == 8)
+                for (int j = 16; j > 0; j--)
                 {
-                    resXOR += (char)value;
-                    h = 0;
-                    value = 0;
+                    R[j - 1] = L[j];
+                    L[j - 1] = XORDES(R[j], F(XORDES(E(L[j]), k[j])));
                 }
-            }
 
+                block = "";
+                // Собираем результат шифрования всех блоков
+                for (int j = 0; j < IP_1.Length; j++)
+                {
+                    block += (L[0] + R[0])[IP_1[j] - 1];
+                }
+
+                decrDex += DexDec(block);
+            }
+            int y = 0;
+            y = decrDex.Length;
             MessageBox.Show("Открытый текст очищен");
-            textBox_OpenText.Text = resXOR;
+            textBox_OpenText.Text = decrDex;
         }
 
         private void SaveOpenTextToolStripMenuItem_Click(object sender, EventArgs e)
