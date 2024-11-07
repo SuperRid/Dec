@@ -55,6 +55,9 @@
             this.очиститьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.зашифроватьRSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -230,7 +233,8 @@
             // 
             this.зашифроватьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.зашифроватьXORToolStripMenuItem,
-            this.зашифроватьDECToolStripMenuItem});
+            this.зашифроватьDECToolStripMenuItem,
+            this.зашифроватьRSAToolStripMenuItem});
             this.зашифроватьToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.зашифроватьToolStripMenuItem.Name = "зашифроватьToolStripMenuItem";
             this.зашифроватьToolStripMenuItem.Size = new System.Drawing.Size(152, 32);
@@ -286,11 +290,34 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // зашифроватьRSAToolStripMenuItem
+            // 
+            this.зашифроватьRSAToolStripMenuItem.Name = "зашифроватьRSAToolStripMenuItem";
+            this.зашифроватьRSAToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.зашифроватьRSAToolStripMenuItem.Text = "Зашифровать RSA";
+            this.зашифроватьRSAToolStripMenuItem.Click += new System.EventHandler(this.зашифроватьRSAToolStripMenuItem_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(776, 817);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 12;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(900, 817);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_Key);
             this.Controls.Add(this.label3);
@@ -340,6 +367,9 @@
         private System.Windows.Forms.ToolStripMenuItem зашифроватьDECToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem дешифроватьXORToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem дешифроватьDECToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem зашифроватьRSAToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

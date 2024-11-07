@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
 using System.Threading;
+using System.Security.AccessControl;
 
 namespace CoDex
 {
@@ -524,6 +525,88 @@ namespace CoDex
             textBox_OpenTextHex.Text = dataHex;
         }
 
+
+        private void зашифроватьRSAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int n = 1;
+            int q = 1;
+            int p = 1;
+            int fi_n= 1;
+
+            p = FindPQ(rand);
+            q = FindPQ(rand);
+
+
+            textBox1.Text = p.ToString();
+            textBox2.Text = q.ToString();
+
+            n = p * q;
+            fi_n = (p-1) * (q-1);
+            textBox_CloseTextHex.Text = n.ToString();
+            AlgEuclid(rand, fi_n);
+        }
+
+        private int FindPQ(Random rand)
+        {
+            bool good = false;
+            int value = 0;
+         
+            while (!good)
+            {
+                int r = rand.Next(2, 65536);
+                for (int i = 0; i < 6; i++)
+                {
+                    int b = r - 1;
+                    int a = rand.Next(1, b);
+                    int res = 1;
+
+                    while (b > 0)
+                    {
+                        if (b % 2 == 1)
+                        {
+                            res = (res * a) % r;
+                        }
+                        a = (a * a) % r;
+                        b /= 2;
+                    }
+                    if (res != 1)
+                    {
+                        good = false;
+                        break;
+                    }
+
+                    if (res == 1 && i == 5)
+                    {
+                        good = true;
+                        value = r;
+                    }
+                }
+            }
+            return value;
+        }
+
+        private void AlgEuclid(Random rand, int fi_n)
+        {
+            int gcd = 0;
+            int value = 0;
+            while (gcd != 1)
+            {
+                int e = rand.Next(1, fi_n);
+                int a = e;
+                int b = fi_n;
+                while (b != 0)
+                {
+                    int r = a % b;
+                    a = b;
+                    b = r;
+                }
+                gcd = a;
+                value = e;
+            }
+
+            textBox_Key.Text = value.ToString();
+        }
         private void загрузитьОткрытыйТекстToolStripMenuItem_Click(object sender, EventArgs e)
         {
             textBox_OpenTextHex.Text = "";
