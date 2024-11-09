@@ -49,15 +49,18 @@
             this.зашифроватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.зашифроватьXORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.зашифроватьDECToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.зашифроватьRSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дешифроватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дешифроватьXORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дешифроватьDECToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.зашифроватьRSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дешифроватьRSAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -254,11 +257,19 @@
             this.зашифроватьDECToolStripMenuItem.Text = "Зашифровать DEC";
             this.зашифроватьDECToolStripMenuItem.Click += new System.EventHandler(this.зашифроватьDECToolStripMenuItem_Click);
             // 
+            // зашифроватьRSAToolStripMenuItem
+            // 
+            this.зашифроватьRSAToolStripMenuItem.Name = "зашифроватьRSAToolStripMenuItem";
+            this.зашифроватьRSAToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.зашифроватьRSAToolStripMenuItem.Text = "Зашифровать RSA";
+            this.зашифроватьRSAToolStripMenuItem.Click += new System.EventHandler(this.зашифроватьRSAToolStripMenuItem_Click);
+            // 
             // дешифроватьToolStripMenuItem
             // 
             this.дешифроватьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.дешифроватьXORToolStripMenuItem,
-            this.дешифроватьDECToolStripMenuItem});
+            this.дешифроватьDECToolStripMenuItem,
+            this.дешифроватьRSAToolStripMenuItem});
             this.дешифроватьToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.дешифроватьToolStripMenuItem.Name = "дешифроватьToolStripMenuItem";
             this.дешифроватьToolStripMenuItem.Size = new System.Drawing.Size(155, 32);
@@ -290,33 +301,61 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // зашифроватьRSAToolStripMenuItem
+            // дешифроватьRSAToolStripMenuItem
             // 
-            this.зашифроватьRSAToolStripMenuItem.Name = "зашифроватьRSAToolStripMenuItem";
-            this.зашифроватьRSAToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
-            this.зашифроватьRSAToolStripMenuItem.Text = "Зашифровать RSA";
-            this.зашифроватьRSAToolStripMenuItem.Click += new System.EventHandler(this.зашифроватьRSAToolStripMenuItem_Click);
+            this.дешифроватьRSAToolStripMenuItem.Name = "дешифроватьRSAToolStripMenuItem";
+            this.дешифроватьRSAToolStripMenuItem.Size = new System.Drawing.Size(271, 32);
+            this.дешифроватьRSAToolStripMenuItem.Text = "Дешифровать RSA";
+            this.дешифроватьRSAToolStripMenuItem.Click += new System.EventHandler(this.дешифроватьRSAToolStripMenuItem_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(776, 817);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(776, 260);
+            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(510, 48);
             this.textBox1.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(913, 228);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(244, 29);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Закрытый ключ RSA";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(900, 817);
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox2.Location = new System.Drawing.Point(776, 164);
+            this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 13;
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox2.Size = new System.Drawing.Size(510, 48);
+            this.textBox2.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(913, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(245, 29);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Открытый ключ RSA";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_Key);
@@ -368,8 +407,11 @@
         private System.Windows.Forms.ToolStripMenuItem дешифроватьXORToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem дешифроватьDECToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem зашифроватьRSAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дешифроватьRSAToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label6;
     }
 }
 

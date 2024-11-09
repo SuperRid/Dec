@@ -46,11 +46,18 @@ namespace CoDex
         string blockHex = "";
         int value = 0;
 
-        bool click = false;
+        int n = 1;
+        int d = 1; 
+
 
         public Form1()
         {
             InitializeComponent();
+            label5.Enabled = false;
+            textBox1.Enabled = false;
+            label6.Enabled = false;
+            textBox2.Enabled = false;
+            label3.Text = "Закрытый текст Hex";
         }
         string Hex(string num)
         {
@@ -106,6 +113,7 @@ namespace CoDex
             }
             return resXOR;
         }
+       
 
         string XORDES(string num1, string num2)
         {
@@ -222,6 +230,12 @@ namespace CoDex
       
         private void зашифроватьDECToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            label5.Enabled = false;
+            textBox1.Enabled = false;
+            label6.Enabled = false;
+            textBox2.Enabled = false;
+            label3.Text = "Закрытый текст Hex";
+
             encrHex = "";
             now = "";
 
@@ -290,7 +304,7 @@ namespace CoDex
                 now += Hex(block);
             }
 
-            textBox_CloseTextHex.Text = now;
+                textBox_CloseTextHex.Text = now;
 
         }
 
@@ -528,24 +542,93 @@ namespace CoDex
 
         private void зашифроватьRSAToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            label6.Enabled = true;
+            textBox1.Enabled = true;
+            label5.Enabled = true;
+            textBox2.Enabled = true;
+            label3.Text = "Закрытый текст Dex";
+
             Random rand = new Random();
-            int n = 1;
+        
             int q = 1;
             int p = 1;
-            int fi_n= 1;
+            int fi_n = 1;
+            int e1;
 
             p = FindPQ(rand);
             q = FindPQ(rand);
 
-
-            textBox1.Text = p.ToString();
-            textBox2.Text = q.ToString();
-
             n = p * q;
-            fi_n = (p-1) * (q-1);
-            textBox_CloseTextHex.Text = n.ToString();
-            AlgEuclid(rand, fi_n);
+            fi_n = (p - 1) * (q - 1);
+            e1 = AlgEuclid(rand, fi_n);
+   
+            var (gcd, x, y) = AdvAlgEuclid(e1, fi_n);
+            if (x < 0) d = x + fi_n;
+            else d = x;
+
+            p = 0;
+            q = 0;
+            fi_n = 0;
+
+            textBox2.Text = e1.ToString();
+            textBox1.Text = d.ToString();
+
+            string C = "";
+            data = textBox_OpenText.Text;
+            for (int i = 0; i < data.Length; i++)
+            {
+                C += RecursAlg(data[i], e1, n) + " "; 
+            }
+
+            textBox_CloseTextHex.Text = C;
         }
+
+        private void дешифроватьRSAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            data = "";
+
+            data = textBox_CloseTextHex.Text;
+            string M = "";
+            string value = "";
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] != ' ')
+                {
+                    value += data[i];
+                }
+
+                else
+                {
+                    M += (char)RecursAlg(Convert.ToInt64(value), d, n);
+                    value = "";
+                }
+            }
+            textBox_OpenText.Text = "";
+            MessageBox.Show("Открытый текст очищен");
+            textBox_OpenText.Text = M;
+        }
+
+
+        private long RecursAlg(long a, int b, int r)
+        {
+            if (b == 0)
+                return 1;
+
+            long half = RecursAlg(a, b / 2, r);
+            long result = (half * half) % r;
+
+
+            if (b % 2 != 0) // если степень нечётная
+                result = (result * a) % r;
+
+            // Приводим результат к положительному числу
+            if (result < 0)
+                result += r;
+
+            return result;
+        }
+
 
         private int FindPQ(Random rand)
         {
@@ -554,22 +637,15 @@ namespace CoDex
          
             while (!good)
             {
-                int r = rand.Next(2, 65536);
+                int r = rand.Next(3, 65536);
                 for (int i = 0; i < 6; i++)
                 {
                     int b = r - 1;
                     int a = rand.Next(1, b);
-                    int res = 1;
+                    long res;
 
-                    while (b > 0)
-                    {
-                        if (b % 2 == 1)
-                        {
-                            res = (res * a) % r;
-                        }
-                        a = (a * a) % r;
-                        b /= 2;
-                    }
+                    res = RecursAlg(a, b, r);
+
                     if (res != 1)
                     {
                         good = false;
@@ -586,7 +662,7 @@ namespace CoDex
             return value;
         }
 
-        private void AlgEuclid(Random rand, int fi_n)
+        private int AlgEuclid(Random rand, int fi_n)
         {
             int gcd = 0;
             int value = 0;
@@ -605,8 +681,24 @@ namespace CoDex
                 value = e;
             }
 
-            textBox_Key.Text = value.ToString();
+            return value;
         }
+
+        private (int gcd, int x, int y) AdvAlgEuclid(int a, int b)
+        {
+            if (b == 0)
+            {
+                return (a, 1, 0);
+            }
+
+            var (gcd, x1, y1) = AdvAlgEuclid(b, a % b);
+
+            int x = y1;
+            int y = x1 - (a / b) * y1;
+
+            return (gcd, x, y);
+        }
+
         private void загрузитьОткрытыйТекстToolStripMenuItem_Click(object sender, EventArgs e)
         {
             textBox_OpenTextHex.Text = "";
@@ -708,6 +800,7 @@ namespace CoDex
             textBox_OpenText.Text = "";
             textBox_CloseTextHex.Text = "";
             textBox_Key.Text = "";
+            textBox1.Text = "";
             key = "";
             keyBin = "";
             data = "";
